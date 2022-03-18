@@ -8,13 +8,14 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
 
     SerialConnectionHandler serialHandler;
     JButton button;
-    SQLConnectionHandler sqlConn;
+    Window window;
 
-    public GraphicsPanel() {
+    public GraphicsPanel(Window window) {
         setPreferredSize(new Dimension(1920, 1080));
 
+        this.window = window;
+
         serialHandler = new SerialConnectionHandler();
-        sqlConn = new SQLConnectionHandler();
 
         button = new JButton("Click for serial");
         button.addActionListener(e -> {
@@ -28,8 +29,7 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
 
     @Override
     public void onValueRead(String uid) {
-        System.out.println(uid);
+        window.startClientConn(uid);
         button.setText(uid);
-        sqlConn.startSQLConn(uid);
     }
 }
