@@ -2,7 +2,6 @@ package com.company;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -19,11 +18,11 @@ import java.io.IOException;
 
 public class GraphicsPanel extends JPanel implements SerialConnectionHandler.SerialListener {
 
+    public static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private final ImageIcon gif = new ImageIcon("lib/Images/gif.gif");
     SerialConnectionHandler serialHandler;
     Window window;
     JDialog dialog;
-    public static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     Buttonratings[] btn = new Buttonratings[5];
     Buttonratings shape = new Buttonratings(30);
     JLayeredPane layer = new JLayeredPane();
@@ -48,7 +47,7 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
 
         textFunction();
         makeButtons();
-        text.setText(String.valueOf(window.requestRatingUpdate()));
+        text.setText(String.valueOf((double)Math.round(window.requestRatingUpdate() * 10) / 10));
         Timer timer = new Timer(1000 * 60 * 10, e -> text.setText(String.valueOf(window.requestRatingUpdate())));
         timer.start();
     }
@@ -67,7 +66,7 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
         window.revalidate();
         Timer timer = new Timer(5000, e -> {
             window.getContentPane().removeAll();
-            window.getContentPane().add(window.graphicsPanel);
+            window.getContentPane().add(window.menu.graphicsPanel);
             for (Buttonratings b : btn) {
                 b.color = Color.gray;
             }
@@ -79,9 +78,10 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
     }
 
     public void makeButtons() {
+        int center = (int) (5.24*20*2.5+(2*(175-5.24*20)));
         for (int i = 0; i <= 4; i++) {
             btn[i] = new Buttonratings(20);
-            btn[i].setBounds(i * 150 + 255, 300, 200, 200);
+            btn[i].setBounds(i * 150 + (screenSize.width/2)-center, screenSize.height / 2,200, 200);
             add(btn[i]);
             buttonFunction(i);
 
@@ -124,14 +124,14 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
 
         text.setVisible(true);
         text.setBounds(112, 23, 200, 200);
-        text.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+        text.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
         layer.add(text);
         layer.setLayer(text, 2);
 
         title.setVisible(true);
         title.setText("Hellosandwich");
         title.setBounds(screenSize.width / 2 - 260, 30, 700, 200);
-        title.setFont(new Font("Comic Sans MS", Font.PLAIN, 80));
+        title.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 80));
         add(title);
     }
 }

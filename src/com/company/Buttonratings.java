@@ -1,22 +1,26 @@
 package com.company;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.Path2D;
 
 public class Buttonratings extends JButton {
 
     Path2D path = new Path2D.Double();
-    Color color=Color.gray;
+    Color color = Color.gray;
 
     public Buttonratings(int SCALE) {
-        double[] pointx = {0 , 2 * SCALE, 2.62 * SCALE, 3.24 * SCALE, 5.24 * SCALE, 3.62 * SCALE, 4.24 * SCALE, 2.62 * SCALE, SCALE, 1.62 * SCALE};
+        double[] pointx = {0, 2 * SCALE, 2.62 * SCALE, 3.24 * SCALE, 5.24 * SCALE, 3.62 * SCALE, 4.24 * SCALE, 2.62 * SCALE, SCALE, 1.62 * SCALE};
         double[] pointy = {0, 0, 1.91 * SCALE, 0, 0, -1.18 * SCALE, -3.08 * SCALE, -1.9 * SCALE, -3.08 * SCALE, -1.18 * SCALE};
 
-        setPreferredSize(new Dimension(8*SCALE,6*SCALE));
+        setPreferredSize(new Dimension(8 * SCALE, 6 * SCALE));
         for (int i = 0; i < pointx.length; i++) {
-            pointx[i] = pointx[i] + 2*SCALE;
-            pointy[i] = pointy[i] + 3.2*SCALE;
+            pointx[i] = pointx[i] + 2 * SCALE;
+            pointy[i] = pointy[i] + 3.2 * SCALE;
         }
         setContentAreaFilled(false);
         setVisible(true);
@@ -26,6 +30,7 @@ public class Buttonratings extends JButton {
         }
         path.closePath();
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         g.setColor(color);

@@ -3,11 +3,12 @@ package com.company;
 import com.fazecast.jSerialComm.SerialPort;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class SerialConnectionHandler {
 
-    private static final String PORT_DESCRIPTION = "USB Serial Device (COM3)";
+    private static final String PORT_DESCRIPTION = "USB-Based Serial Port";
     String uid;
     Scanner in;
     private SerialPort serialPort;
@@ -19,21 +20,15 @@ public class SerialConnectionHandler {
         SerialPort[] ports = SerialPort.getCommPorts();
 
         for (SerialPort sp : ports) {
-            System.out.println(sp.getPortDescription());
-            Scanner pick = new Scanner(System.in);
-            int choice = pick.nextInt();
-            if (choice == 1)
+            if (Objects.equals(sp.getPortDescription(), PORT_DESCRIPTION)) {
                 serialPort = sp;
+            }
         }
 
         if (serialPort == null) {
             System.out.println("Device not found");
         } else
             isConnected = true;
-    }
-
-    public String getUid() {
-        return uid;
     }
 
     public boolean isConnected() {

@@ -3,17 +3,13 @@ package com.company;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Menu extends JPanel {
 
     JButton booth;
     JButton overview;
+    GraphicsPanel graphicsPanel;
 
     public Menu(Window window) {
         setPreferredSize(GraphicsPanel.screenSize);
@@ -23,34 +19,22 @@ public class Menu extends JPanel {
         overview = new JButton("Overview");
 
         booth.addActionListener(e -> {
+            graphicsPanel = new GraphicsPanel(window);
             window.getContentPane().removeAll();
-            window.getContentPane().add(window.graphicsPanel);
+            window.getContentPane().add(graphicsPanel);
             window.revalidate();
         });
 
         overview.addActionListener(e -> {
-            Booth booth = new Booth();
-            int Cols = (int)Math.sqrt(booth.getComponentCount()*16/9);
-            booth.setLayout(new GridLayout(0, Cols));
-            booth.setBackground(new Color(254,105,0));
+            Overview overview = new Overview(window);
+            int Cols = (int) Math.sqrt(overview.getComponentCount() * 16.00 / 9.00);
+            overview.setLayout(new GridLayout(0, Cols));
+            overview.setBackground(new Color(254, 105, 0));
 
-            ArrayList<ArrayList> arrayList = window.requestOverviewUpdate();
-            ArrayList<String> places = arrayList.get(0);
-            ArrayList<Double> averageRatings = arrayList.get(1);
-            int i = 0;
-            for (String s : places) {
-                booth.Navn[i] = s;
-                booth.Rating[i] = averageRatings.get(i);
-                i++;
-            }
-            int k = 0;
-            for (Overview o : booth.getC()) {
-                o.getT1().setText(o.getBodnNr() + " - " + booth.Navn[k]);
-                o.getT2().setText("   Rating: " + booth.Rating[k]);
-                k++;
-            }
+            overview.updateOverview();
+
             window.getContentPane().removeAll();
-            window.getContentPane().add(booth);
+            window.getContentPane().add(overview);
             window.revalidate();
             window.repaint();
         });

@@ -9,26 +9,28 @@ import java.util.ArrayList;
 
 public class Window extends JFrame {
 
-    final String IP = "192.168.0.18";
+    final String IP = "10.160.211.251";
     final int PORT = 3305;
 
     final String PLACE = "Hello Worlds Sandwiches";
 
     Menu menu;
-    GraphicsPanel graphicsPanel;
     Socket socket;
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
 
     public Window() {
         menu = new Menu(this);
-        graphicsPanel = new GraphicsPanel(this);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(true);
         setVisible(true);
         getContentPane().add(menu);
         pack();
+    }
+
+    public static void main(String[] args) {
+        new Window();
     }
 
     public void startClientConn(String uid, int rating) {
@@ -122,9 +124,5 @@ public class Window extends JFrame {
         arrayList.add(places);
         arrayList.add(averageRatings);
         return arrayList;
-    }
-
-    public static void main(String[] args) {
-        new Window();
     }
 }
