@@ -1,4 +1,4 @@
-package com.company;
+package dk.htx.ddu.client;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -53,7 +53,7 @@ public class Booth extends JPanel {
         add(t2);
 
         try {
-            image = ImageIO.read(new File("lib/Images/starboy.png"));
+            image = ImageIO.read(ClassLoader.getSystemResource("images/starboy.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,4 +1,4 @@
-package com.company;
+package dk.htx.ddu.server;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;

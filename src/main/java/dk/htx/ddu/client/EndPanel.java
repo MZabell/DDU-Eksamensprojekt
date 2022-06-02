@@ -1,4 +1,4 @@
-package com.company;
+package dk.htx.ddu.client;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -21,7 +21,7 @@ public class EndPanel extends JPanel {
         label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 80));
         add(label);
         try {
-            backgroundImage = ImageIO.read(new File("lib/Images/placeholder-card.png"));
+            backgroundImage = ImageIO.read(ClassLoader.getSystemResource("images/placeholder-card.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

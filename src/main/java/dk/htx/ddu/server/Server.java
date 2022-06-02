@@ -1,4 +1,4 @@
-package com.company;
+package dk.htx.ddu.server;
 
 import javax.swing.JFrame;
 import java.io.DataInputStream;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Server extends JFrame {
 
-    final String IP = "10.160.220.80";
+    public static String IP;
     final int SQL_PORT = 3306;
     final int SERVER_PORT = 3305;
     final String USERNAME = "user1";
@@ -101,6 +101,7 @@ public class Server extends JFrame {
     }
 
     public static void main(String[] args) {
+        IP = args[0];
         new Server();
     }
 }

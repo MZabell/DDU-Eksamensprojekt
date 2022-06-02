@@ -1,4 +1,4 @@
-package com.company;
+package dk.htx.ddu.client;
 
 import javax.swing.JFrame;
 import java.io.DataInputStream;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Window extends JFrame {
 
-    final String IP = "10.160.211.251";
+    public static String IP;
     final int PORT = 3305;
 
     final String PLACE = "Hello Worlds Sandwiches";
@@ -30,6 +30,7 @@ public class Window extends JFrame {
     }
 
     public static void main(String[] args) {
+        IP = args[0];
         new Window();
     }
 

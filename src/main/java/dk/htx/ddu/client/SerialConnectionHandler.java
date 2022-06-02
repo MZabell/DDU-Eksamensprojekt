@@ -1,4 +1,4 @@
-package com.company;
+package dk.htx.ddu.client;
 
 import com.fazecast.jSerialComm.SerialPort;
 

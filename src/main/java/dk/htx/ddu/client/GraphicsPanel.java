@@ -1,4 +1,4 @@
-package com.company;
+package dk.htx.ddu.client;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -15,11 +15,12 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class GraphicsPanel extends JPanel implements SerialConnectionHandler.SerialListener {
 
     public static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private final ImageIcon gif = new ImageIcon("lib/Images/gif.gif");
+    private final ImageIcon gif;
     SerialConnectionHandler serialHandler;
     Window window;
     JDialog dialog;
@@ -32,14 +33,17 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
     private Image backgroundImage;
 
     public GraphicsPanel(Window window) {
-        setPreferredSize(screenSize);
-        setLayout(null);
-        setVisible(true);
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        gif = new ImageIcon(Objects.requireNonNull(classLoader.getResource("images/gif.gif")));
         try {
-            backgroundImage = ImageIO.read(new File("lib/Images/placeholder-card.png"));
+            backgroundImage = ImageIO.read(Objects.requireNonNull(classLoader.getResource("images/placeholder-card.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        setPreferredSize(screenSize);
+        setLayout(null);
+        setVisible(true);
 
         this.window = window;
 
@@ -47,7 +51,7 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
 
         textFunction();
         makeButtons();
-        text.setText(String.valueOf((double)Math.round(window.requestRatingUpdate() * 10) / 10));
+        text.setText(String.valueOf((double) Math.round(window.requestRatingUpdate() * 10) / 10));
         Timer timer = new Timer(1000 * 60 * 10, e -> text.setText(String.valueOf(window.requestRatingUpdate())));
         timer.start();
     }
@@ -78,10 +82,10 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
     }
 
     public void makeButtons() {
-        int center = (int) (5.24*20*2.5+(2*(175-5.24*20)));
+        int center = (int) (5.24 * 20 * 2.5 + (2 * (175 - 5.24 * 20)));
         for (int i = 0; i <= 4; i++) {
             btn[i] = new Buttonratings(20);
-            btn[i].setBounds(i * 150 + (screenSize.width/2)-center, screenSize.height / 2,200, 200);
+            btn[i].setBounds(i * 150 + (screenSize.width / 2) - center, screenSize.height / 2, 200, 200);
             add(btn[i]);
             buttonFunction(i);
 

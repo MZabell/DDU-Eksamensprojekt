@@ -1,4 +1,4 @@
-package com.company;
+package dk.htx.ddu.server;
 
 import com.mysql.cj.conf.ConnectionUrlParser;
 
