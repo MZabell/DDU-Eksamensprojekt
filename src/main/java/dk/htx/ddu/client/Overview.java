@@ -48,7 +48,7 @@ public class Overview extends JPanel {
         int i = 0;
         for (String s : places) {
             Navn[i] = s;
-            Rating[i] = averageRatings.get(i);
+            Rating[i] = (double) Math.round(averageRatings.get(i) * 10) / 10;
             i++;
         }
         int k = 0;
