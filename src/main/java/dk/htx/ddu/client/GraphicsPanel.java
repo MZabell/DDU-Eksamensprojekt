@@ -52,7 +52,10 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
         textFunction();
         makeButtons();
         text.setText(String.valueOf((double) Math.round(window.requestRatingUpdate() * 10) / 10));
-        Timer timer = new Timer(1000 * 60 * 10, e -> text.setText(String.valueOf((double) Math.round(window.requestRatingUpdate() * 10) / 10)));
+        Timer timer = new Timer(1000 * 10, e -> {
+            text.setText(String.valueOf((double) Math.round(window.requestRatingUpdate() * 10) / 10));
+            repaint();
+        });
         timer.start();
     }
 
