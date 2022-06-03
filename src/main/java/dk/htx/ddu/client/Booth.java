@@ -37,7 +37,7 @@ public class Booth extends JPanel {
         t1.setLineWrap(true);
         t1.setBounds(5, 5, 85, 30);
         t1.setVisible(true);
-        t1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 13));
+        t1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
         t1.setForeground(Color.white);
 
         add(t1);

@@ -31,6 +31,7 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
     JLabel title = new JLabel();
     private int rating;
     private Image backgroundImage;
+    private int temp = 0;
 
     public GraphicsPanel(Window window) {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
@@ -54,7 +55,9 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
         text.setText(String.valueOf((double) Math.round(window.requestRatingUpdate() * 10) / 10));
         Timer timer = new Timer(1000 * 10, e -> {
             text.setText(String.valueOf((double) Math.round(window.requestRatingUpdate() * 10) / 10));
-            repaint();
+            if (temp == 0) {
+                repaint();
+            }
         });
         timer.start();
     }
@@ -79,6 +82,7 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
             }
             window.revalidate();
             window.repaint();
+            temp = 0;
         });
         timer.setRepeats(false);
         timer.start();
@@ -102,6 +106,7 @@ public class GraphicsPanel extends JPanel implements SerialConnectionHandler.Ser
                 System.out.println("Serial is connected");
                 serialHandler.startSerial(this);
             }
+            temp = 1;
             dialog = new JDialog();
             dialog.setUndecorated(true);
             dialog.add(new JLabel(gif));
