@@ -50,16 +50,15 @@ public class Overview extends JPanel {
         ArrayList<Double> averageRatings = arrayList.get(1);
         int i = 0;
         for (String s : places) {
-            if (s == null) {
-                Navn[i] = "Eksempel";
-            } else {
-                Navn[i] = s;
-            }
+            Navn[i] = s;
             Rating[i] = (double) Math.round(averageRatings.get(i) * 10) / 10;
             i++;
         }
         int k = 0;
         for (Booth o : c) {
+            if (Navn[k] == null) {
+                Navn[k] = "Eksempel";
+            }
             o.getT1().setText(o.getBodnNr() + " - " + Navn[k]);
             o.getT2().setText("   Rating: " + Rating[k]);
             o.setRator((int) (Rating[k] * 100));
