@@ -14,7 +14,10 @@ public class Overview extends JPanel {
     public Overview(Window window) {
         this.window = window;
 
-        Timer timer = new Timer(1000 * 10, e -> updateOverview());
+        Timer timer = new Timer(1000 * 10, e -> {
+            updateOverview();
+            repaint();
+        });
         timer.start();
 
         int BodAntal = 104;
