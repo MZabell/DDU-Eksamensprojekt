@@ -50,7 +50,11 @@ public class Overview extends JPanel {
         ArrayList<Double> averageRatings = arrayList.get(1);
         int i = 0;
         for (String s : places) {
-            Navn[i] = s;
+            if (s == null) {
+                Navn[i] = "Eksempel";
+            } else {
+                Navn[i] = s;
+            }
             Rating[i] = (double) Math.round(averageRatings.get(i) * 10) / 10;
             i++;
         }
